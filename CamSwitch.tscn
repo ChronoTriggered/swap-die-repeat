@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="CamSwitch" type="Node"]
+
+[node name="Tween_Camera" type="Tween" parent="."]
+
+[node name="SwitchCamTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Level_Camera" type="Camera2D" parent="."]
