@@ -27,6 +27,10 @@ boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Art/icongame.png"
 config/windows_native_icon="res://icong.ico"
 
+[audio]
+
+driver="pulseaudio"
+
 [autoload]
 
 Music="*res://Scenes/MainThemeMusic.tscn"
@@ -61,4 +65,5 @@ trigger_button={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_environment="res://default_env.tres"
