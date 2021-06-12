@@ -3,22 +3,23 @@ var motion = Vector2()
 var FLOOR = Vector2(0,-1)
 var direction
 
+
 onready var cam = get_parent().get_node("CamSwitch/Level_Camera")
 onready var tween = get_parent().get_node("CamSwitch/Tween_Camera")
 onready var cam_timer = get_parent().get_node("CamSwitch/SwitchCamTimer")
 onready var player_quantity = get_child_count()
-onready var player_amount = get_children()
-var players = []
+onready var players = get_children()
 onready var current
 onready var new_player
+
+
 var character_num = 0
 var can_move = false
 var timer_started = false
 var distance = Vector2()
 
 func _ready():
-	for children in player_amount:
-		players.append(children)
+	for children in players:
 		children.selected_player = character_num
 		character_num+=1
 	print(players)
@@ -39,7 +40,8 @@ func _physics_process(delta):
 			print("null player, moving to next")
 			switch_player()
 		else:
-			cam.position = current.cam.position
+			pass
+			#cam.position = current.cam.position
 		
 func restart_scene():
 	var restart=Input.is_action_just_pressed("restart")
@@ -53,7 +55,6 @@ func back_to_menu():
 
 # This function gets called whenever the button is pressed
 func switch_player():
-
 	if players.size()!=1:
 		cam.current = true
 		can_move = true
@@ -70,7 +71,6 @@ func switch_player():
 		cam_timer.start()
 		timer_started = true
 		print(players)
-
 	else: current.dead()
 	
 #This timer starts whenever the tween to move the 
@@ -88,29 +88,15 @@ func _on_SwitchCamTimer_timeout():
 		a+=1
 	can_move = false
 
-func _on_QuickPlayer_killed(who):
-	remove_player(who)
 
-func _on_StrongPlayer_killed(who):
-	remove_player(who)
-#	print("Player in position #",who," has been deleted")
-#	players.remove(who)
-#	cam_timer.start()
-
-func _on_TechPlayer_killed(who):
-	remove_player(who)
-#	print("Player in position #",who," has been deleted")
-#	players.remove(who)
-#	cam_timer.start()
-
-func remove_player(who):
+func player_killed(who):
 	var i = 0
 	for player in players:
 		if player.selected_player == who:
 			players.remove(i)
 			print("Player in position #",i," has been deleted")
 		i+=1
-	print(players)
+
 	cam_timer.start()
 
 func _on_TechPlayer2_killed(num):

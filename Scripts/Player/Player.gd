@@ -25,6 +25,7 @@ var jump_was_pressed=false
 var is_grounded=true
 
 func _ready():
+	connect("killed",get_parent(),"player_killed")
 	can_move=false
 	player_has_moved=false
 	$NoMovementAllowed.start()
@@ -78,9 +79,6 @@ func _on_NoMovementAllowed_timeout():
 
 func dead():
 	if is_dead == false:
-		if is_on_floor():
-			GRAVITY = -0.5
-			$CollisionShape2D.set_deferred("disabled",true)
 		emit_signal("killed",selected_player)
 		is_dead = true
 	can_move=false

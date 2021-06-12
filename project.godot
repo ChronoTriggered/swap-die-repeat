@@ -39,6 +39,7 @@ Music="*res://Scenes/MainThemeMusic.tscn"
 
 window/size/width=533
 window/size/height=300
+window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
 window/vsync/vsync_via_compositor=true
